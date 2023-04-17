@@ -1,8 +1,8 @@
-@extends('maket.skelet');
+@extends('maket.skelet')
 
 @section('content')
     <h1>Table</h1>
-    <button class="btn btn-primary mb-3">Add task</button>
+    <a href="{{route('tasks.create')}}" class="btn btn-primary mb-3">Add task</a>
 
     <div class="card mb-4">
         <div class="card-header">
@@ -15,6 +15,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>User</th>
                     <th>Deadline</th>
                     <th>Actions</th>
                 </tr>
@@ -28,14 +29,19 @@
 {{--                </tr>--}}
 {{--                </tfoot>--}}
                 <tbody>
-                @foreach($tasks as $task)
+                @foreach($task as $task)
                 <tr>
                     <td>{{$task->id}}</td>
                     <td>{{$task->task}}</td>
+                    <td>{{$task->user->firstName}}</td>
                     <td>{{$task->deadline}}</td>
                     <td>
-                        <button class="btn btn-success">edit</button>
-                        <button class="btn btn-danger">edit</button>
+                        <form action="{{route('tasks.destroy', $task->id)}}" method="post">
+                            <a href="{{ route('tasks.edit', $task->id)}}" class="btn btn-success "><i class="fa fa-pencil"></i></a>
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger show_confirm"><i class="fa fa-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -43,5 +49,9 @@
             </table>
         </div>
     </div>
-
+<script>
+    @if ($message = Session::get('success'))
+    toastr.success("{{$message}}");
+    @endif
+</script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('maket.skelet');
+@extends('maket.skelet')
 
 @section('content')
 
@@ -69,4 +69,5 @@
         </div>
     </div>
 
-@endsection;
+
+@endsection

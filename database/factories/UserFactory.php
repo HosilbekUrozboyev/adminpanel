@@ -18,12 +18,14 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'tel_raqam' => $this->faker->phoneNumber(),
+            'firstName' => $this->faker->firstName(),
+            'lastName' => $this->faker->lastName(),
+            'phoneNumber' => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$u72F813w27.g5frXWqOv4.hsxM4tn7gqTELFNXM6D.TWEifl3ljZG', // password
+            'password' => bcrypt('password'), // password
             'rol' => '0',
+
 //            'remember_token' => Str::random(15),
         ];
     }

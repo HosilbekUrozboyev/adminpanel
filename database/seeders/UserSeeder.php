@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -17,15 +18,20 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(20)->create();
+        $user = User::create([
+            'firstName' => 'Admin',
+            'lastName' => 'Admin',
+            'phoneNumber' => '0',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
+        ]);
+//        $user->assignRole('admin');
 
-//        DB::table('users')->insert([
-//           'name' => 'Admin',
-//           'tel_raqam' => '+998 93 772 57 52',
-//           'email' => 'admin@gmail.com',
-//           'password' => Hash::make('admin'),
-//           'rol' => Hash::make('0'),
-//
-//        ]);
+        $users = User::factory(10)->create();
+//        foreach ($users as $user) {
+//            $user->assignRole('admin');
+//        }
+
+
     }
 }

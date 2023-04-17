@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    Route::resource('users',\App\Http\Controllers\Api\UserController::class);
+    Route::resource('users',\App\Http\Controllers\Api\DebtController::class);
+    Route::get('/user/{id}', [\App\Http\Controllers\Api\UserController::class, 'show']);
+    Route::get('/debt/{id}', [\App\Http\Controllers\Api\DebtController::class, 'show']);
